@@ -1,4 +1,4 @@
-package ru.stqa.pft.sanbox;
+package ru.stqa.pft.sandbox;
 
 public class MyFirstProgram {
 
@@ -16,7 +16,7 @@ public class MyFirstProgram {
 
 		//hometask #2
 		Point p1 = new Point( 12, 12);
-		Point p2 = new Point(9,9);
+		Point p2 = new Point(12,12);
 		System.out.println("Расстояние между двумя точками на плоскости с координатами" + " x1 = " + p1.x + ", y1 = " + p1.y + " и " + " x2 = " + p2.x + ", y2 = " + p2.y  + " равно " + p1.distance(p2));
 	}
 
