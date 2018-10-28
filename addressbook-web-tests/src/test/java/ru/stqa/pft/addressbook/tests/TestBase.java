@@ -9,16 +9,16 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 public class TestBase{
 
-//    protected final ApplicationManager app = new ApplicationManager(BrowserType.SAFARI);
-//
-//    @BeforeMethod
-//    public void setUp(){
-//        app.init();
-//    }
-//
-//    @AfterMethod
-//    public void tearDown(){
-//        app.stop();
-//    }
+    protected final ApplicationManager app = new ApplicationManager(BrowserType.SAFARI);
+
+    @BeforeMethod
+    public void setUp(){
+        app.init();
+    }
+
+    @AfterMethod
+    public void tearDown(){
+        app.stop();
+    }
 
 }
