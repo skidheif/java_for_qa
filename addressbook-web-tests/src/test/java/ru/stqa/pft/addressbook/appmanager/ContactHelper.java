@@ -1,13 +1,15 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
-    public ContactHelper(WebDriver wd){
+    public ContactHelper(WebDriver wd) {
         super(wd);
     }
 
@@ -15,7 +17,7 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("(//input[@name='submit'])[2]"));
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
@@ -34,6 +36,12 @@ public class ContactHelper extends HelperBase{
         type(By.name("address2"), contactData.getAddress2());
         type(By.name("phone2"), contactData.getHome2());
         type(By.name("notes"), contactData.getNote());
+
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void returnToHomepage() {
@@ -48,8 +56,7 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//input[@value='Delete']"));
     }
 
-    public void submitDeleteForm()
-    {
+    public void submitDeleteForm() {
         wd.switchTo().alert().accept();
     }
 

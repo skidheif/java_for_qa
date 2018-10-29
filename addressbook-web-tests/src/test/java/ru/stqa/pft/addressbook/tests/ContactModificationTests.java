@@ -11,24 +11,26 @@ public class ContactModificationTests extends TestBase {
         app.getNavigationHelper().gotoHomePage();
         app.getContactHelper().selectAndEditContact();
         app.getContactHelper().fillContactForm(new ContactData(
-                "Petr",
-                "Petrovich",
-                "Petrov",
-                "Real Nickname",
-                "Real Title",
-                "Real Company",
-                "Real Address 1",
-                "Moscow",
-                "81234567890",
-                "Real Work",
-                "Real Fax",
-                "Real1@Real.com",
-                "Real2@Real.com",
-                "Real3@Real.com",
-                "Real Homepage",
-                "Real Address 2",
-                "Real Home",
-                "Real Note"));
+                        "Petr",
+                        "Petrovich",
+                        "Petrov",
+                        "Real Nickname",
+                        "Real Title",
+                        "Real Company",
+                        "Real Address 1",
+                        "Moscow",
+                        "81234567890",
+                        "Real Work",
+                        "Real Fax",
+                        "Real1@Real.com",
+                        "Real2@Real.com",
+                        "Real3@Real.com",
+                        "Real Homepage",
+                        "Real Address 2",
+                        "Real Home",
+                        "Real Note",
+                        null),
+                false);
         app.getContactHelper().submitContactModification();
         app.getContactHelper().returnToHomepage();
     }
