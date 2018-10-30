@@ -9,6 +9,29 @@ public class ContactModificationTests extends TestBase {
 
     public void testContactModification() {
         app.getNavigationHelper().gotoHomePage();
+        if (!app.getContactHelper().isThereAContact()) {
+            app.getContactHelper().createContact(new ContactData(
+                            "Ivan",
+                            "Ivanovich",
+                            "Ivanov",
+                            "Test Nickname",
+                            "Test Title",
+                            "Test Company",
+                            "Test Address 1",
+                            "Moscow",
+                            "81234567890",
+                            "Test Work",
+                            "Test Fax",
+                            "test1@test.com",
+                            "test2@test.com",
+                            "test3@test.com",
+                            "Test Homepage",
+                            "Test Address 2",
+                            "Test Home",
+                            "Test Note",
+                            "test1"),
+                    true);
+        }
         app.getContactHelper().selectAndEditContact();
         app.getContactHelper().fillContactForm(new ContactData(
                         "Petr",

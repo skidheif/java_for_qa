@@ -66,4 +66,44 @@ public class ContactHelper extends HelperBase {
     public void submitContactModification() {
         click(By.xpath("(//input[@name='update'])[2]"));
     }
+
+    public void gotoAddNewContactPage() {
+        if (isElementPresent(By.tagName("h1"))
+                && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")
+                && isElementPresent(By.name("submit"))) {
+            return;
+        }
+        click(By.linkText("add new"));
+    }
+
+    public void createContact(ContactData contact, boolean creation) {
+        gotoAddNewContactPage();
+        fillContactForm(new ContactData(
+                        "Ivan",
+                        "Ivanovich",
+                        "Ivanov",
+                        "Test Nickname",
+                        "Test Title",
+                        "Test Company",
+                        "Test Address 1",
+                        "Moscow",
+                        "81234567890",
+                        "Test Work",
+                        "Test Fax",
+                        "test1@test.com",
+                        "test2@test.com",
+                        "test3@test.com",
+                        "Test Homepage",
+                        "Test Address 2",
+                        "Test Home",
+                        "Test Note",
+                        "test1"),
+                true);
+        submitContactCreation();
+        returnToHomepage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }

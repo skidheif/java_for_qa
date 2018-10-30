@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-public class GroupHelper extends HelperBase{
+public class GroupHelper extends HelperBase {
 
     public GroupHelper(WebDriver wd) {
         super(wd);
@@ -54,5 +54,9 @@ public class GroupHelper extends HelperBase{
 
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public boolean isThereAGroupFromList() {
+        return isElementPresent(By.name("test1"));
     }
 }

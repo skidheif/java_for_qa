@@ -2,14 +2,18 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 
 public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreation() {
-        app.getNavigationHelper().gotoAddNewContactPage();
-        app.getContactHelper().fillContactForm(new ContactData(
+        if (! app.getGroupHelper().isThereAGroupFromList())
+        {
+            app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+        }
+        app.getContactHelper().createContact(new ContactData(
                         "Ivan",
                         "Ivanovich",
                         "Ivanov",
@@ -30,7 +34,5 @@ public class ContactCreationTests extends TestBase {
                         "Test Note",
                         "test1"),
                 true);
-        app.getContactHelper().submitContactCreation();
-        app.getContactHelper().returnToHomepage();
     }
 }
