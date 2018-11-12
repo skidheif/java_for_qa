@@ -53,7 +53,7 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void selectAndEditContact() {
+    public void selectAndEditContact(int index) {
         click(By.xpath("//img[@alt='Edit']"));
     }
 
