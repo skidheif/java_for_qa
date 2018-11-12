@@ -2,9 +2,13 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -18,23 +22,13 @@ public class ContactHelper extends HelperBase {
 
     public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getName());
-        type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("nickname"), contactData.getNickname());
         type(By.name("title"), contactData.getTitle());
-        type(By.name("company"), contactData.getCompany_title());
-        type(By.name("address"), contactData.getAddress1());
-        type(By.name("home"), contactData.getHome1());
+        type(By.name("company"), contactData.getCompany());
+        type(By.name("address"), contactData.getAddress());
         type(By.name("mobile"), contactData.getMobile());
-        type(By.name("work"), contactData.getWork());
-        type(By.name("fax"), contactData.getFax());
-        type(By.name("email"), contactData.getEmail1());
-        type(By.name("email2"), contactData.getEmail2());
-        type(By.name("email3"), contactData.getEmail3());
-        type(By.name("homepage"), contactData.getHomepage());
-        type(By.name("address2"), contactData.getAddress2());
-        type(By.name("phone2"), contactData.getHome2());
-        type(By.name("notes"), contactData.getNote());
+        type(By.name("email"), contactData.getEmail());
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -78,32 +72,26 @@ public class ContactHelper extends HelperBase {
 
     public void createContact(ContactData contact, boolean creation) {
         gotoAddNewContactPage();
-        fillContactForm(new ContactData(
-                        "Ivan",
-                        "Ivanovich",
-                        "Ivanov",
-                        "Test Nickname",
-                        "Test Title",
-                        "Test Company",
-                        "Test Address 1",
-                        "Moscow",
-                        "81234567890",
-                        "Test Work",
-                        "Test Fax",
-                        "test1@test.com",
-                        "test2@test.com",
-                        "test3@test.com",
-                        "Test Homepage",
-                        "Test Address 2",
-                        "Test Home",
-                        "Test Note",
-                        "test1"),
-                true);
+        fillContactForm(contact, creation);
         submitContactCreation();
         returnToHomepage();
     }
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
+        for (WebElement element : elements) {
+            List<WebElement> fields = element.findElements(By.cssSelector("td"));
+            String lastName = fields.get(1).getText();
+            String firstName = fields.get(2).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData(id, firstName, lastName, null, null, null, null, null, null, null);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
