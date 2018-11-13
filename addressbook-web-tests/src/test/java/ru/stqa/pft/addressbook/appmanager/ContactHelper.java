@@ -41,7 +41,7 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("home"));
     }
 
-    public void selectContact() {
+    public void selectContact(int index) {
         click(By.name("selected[]"));
     }
 
