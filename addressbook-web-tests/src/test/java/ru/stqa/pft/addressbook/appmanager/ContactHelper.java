@@ -101,13 +101,20 @@ public class ContactHelper extends HelperBase {
 
     public Contacts all() {
         Contacts contacts = new Contacts();
-        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
-        for (WebElement element : elements) {
-            List<WebElement> fields = element.findElements(By.cssSelector("td"));
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            String lastName = fields.get(1).getText();
-            String firstName = fields.get(2).getText();
-            contacts.add(new ContactData().withId(id).withName(firstName).withLastName(lastName));
+        List<WebElement> rows = wd.findElements(By.cssSelector("tr[name='entry']"));
+        for (WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.cssSelector("td"));
+            int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
+            String lastName = cells.get(1).getText();
+            String firstName = cells.get(2).getText();
+            String[] phones = cells.get(5).getText().split("\n");
+            contacts.add(new ContactData()
+                    .withId(id)
+                    .withName(firstName)
+                    .withLastName(lastName)
+                    .withHomePhone(phones[0])
+                    .withMobilePhone(phones[1])
+                    .withWorkPhone(phones[2]));
         }
         return contacts;
     }
@@ -125,7 +132,7 @@ public class ContactHelper extends HelperBase {
     }
 
     private void initContactModificationById(int id) {
-        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value]='%s']", id)));
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
