@@ -3,8 +3,8 @@ package ru.stqa.pft.addressbook.tests.groups;
 import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.Groups;
+import ru.stqa.pft.addressbook.model.groups.GroupData;
+import ru.stqa.pft.addressbook.model.groups.Groups;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
 import static org.hamcrest.CoreMatchers.equalTo;

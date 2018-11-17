@@ -2,10 +2,9 @@ package ru.stqa.pft.addressbook.tests.contacts;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.contacts.ContactData;
+import ru.stqa.pft.addressbook.model.contacts.Contacts;
 import ru.stqa.pft.addressbook.tests.TestBase;
-
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

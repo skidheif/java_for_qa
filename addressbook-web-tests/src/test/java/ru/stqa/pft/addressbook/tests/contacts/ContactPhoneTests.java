@@ -1,7 +1,7 @@
 package ru.stqa.pft.addressbook.tests.contacts;
 
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.contacts.ContactData;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
 import java.util.Arrays;
