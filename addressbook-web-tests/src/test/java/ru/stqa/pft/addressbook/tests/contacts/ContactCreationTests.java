@@ -7,6 +7,8 @@ import ru.stqa.pft.addressbook.model.contacts.Contacts;
 import ru.stqa.pft.addressbook.model.groups.GroupData;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -25,6 +27,7 @@ public class ContactCreationTests extends TestBase {
     public void testContactCreation() {
         app.goTo().homePage();
         Contacts before = app.contact().all();
+        File photo = new File("src/test/resources/ava.jpg");
         ContactData contact = new ContactData()
                 .withName("Ivan")
                 .withLastName("Ivanov")
@@ -34,7 +37,8 @@ public class ContactCreationTests extends TestBase {
                 .withAddress("Moscow")
                 .withMobilePhone("81234567890")
                 .withEmail("test@test.com")
-                .withGroup("test1");
+                .withGroup("test1")
+                .withPhoto(photo);
         app.contact().create(contact, true);
         Contacts after = app.contact().all();
         assertThat(after.size(), equalTo(before.size() + 1));
