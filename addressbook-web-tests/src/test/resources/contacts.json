@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Name 0",
+    "lastName": "Lastname 0",
+    "nickname": "Nickname 0",
+    "title": "Title 0",
+    "company": "Company 0",
+    "address": "Address 0",
+    "mobilePhone": "81234567890",
+    "email": "test@test.com",
+    "group": "test1"
+  }
+]

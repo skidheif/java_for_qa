@@ -88,6 +88,7 @@ public class ContactDataGenerator {
 
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
+        File photo = new File("src/test/resources/ava.jpg");
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData()
                     .withName(String.format("Name %s", i))
@@ -96,6 +97,10 @@ public class ContactDataGenerator {
                     .withTitle(String.format("Title %s", i))
                     .withCompany(String.format("Company %s", i))
                     .withAddress(String.format("Address %s", i))
+                    .withMobilePhone("81234567890")
+                    .withEmail("test@test.com")
+//                    .withPhoto(photo)
+                    .withGroup("test1")
             );
         }
         return contacts;

@@ -1,0 +1,26 @@
+<list>
+  <contact>
+    <name>Name 0</name>
+    <lastName>Lastname 0</lastName>
+    <nickname>Nickname 0</nickname>
+    <title>Title 0</title>
+    <company>Company 0</company>
+    <address>Address 0</address>
+  </contact>
+  <contact>
+    <name>Name 1</name>
+    <lastName>Lastname 1</lastName>
+    <nickname>Nickname 1</nickname>
+    <title>Title 1</title>
+    <company>Company 1</company>
+    <address>Address 1</address>
+  </contact>
+  <contact>
+    <name>Name 2</name>
+    <lastName>Lastname 2</lastName>
+    <nickname>Nickname 2</nickname>
+    <title>Title 2</title>
+    <company>Company 2</company>
+    <address>Address 2</address>
+  </contact>
+</list>

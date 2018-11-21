@@ -25,14 +25,16 @@ public class ContactData {
     private String address;
     private String allPhones;
     private String homePhone;
+    @Expose
     private String mobilePhone;
     private String workPhone;
     private String allEmails;
+    @Expose
     private String email;
     private String email2;
     private String email3;
+    @Expose
     private String group;
-
     private File photo;
 
     public int getId() {
