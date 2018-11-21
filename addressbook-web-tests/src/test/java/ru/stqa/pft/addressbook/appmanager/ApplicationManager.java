@@ -6,9 +6,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
+    private final Properties properties;
     WebDriver wd;
 
     private SessionHelper sessionHelper;
@@ -17,26 +23,30 @@ public class ApplicationManager {
     private ContactHelper contactHelper;
     private String browser;
 
-    public ApplicationManager(String browser) {
+    public ApplicationManager(String browser){
         this.browser = browser;
+        properties = new Properties();
     }
 
-    public void init() {
-        if (browser.equals(BrowserType.FIREFOX)){
+    public void init() throws IOException {
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
+        if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
-        } else if (browser.equals(BrowserType.CHROME)){
+        } else if (browser.equals(BrowserType.CHROME)) {
             wd = new ChromeDriver();
-        } else if (browser.equals(BrowserType.SAFARI)){
+        } else if (browser.equals(BrowserType.SAFARI)) {
             wd = new SafariDriver();
         }
 
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        wd.get("http://localhost/addressbook/");
+        wd.get(properties.getProperty("web.baseUrl"));
         sessionHelper = new SessionHelper(wd);
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         contactHelper = new ContactHelper(wd);
-        sessionHelper.login("admin", "secret");
+        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
     }
 
     public void stop() {
