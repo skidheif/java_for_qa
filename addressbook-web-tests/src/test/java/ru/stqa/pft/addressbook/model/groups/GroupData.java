@@ -3,19 +3,40 @@ package ru.stqa.pft.addressbook.model.groups;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Objects;
 
 @XStreamAlias("group")
-public class GroupData {
+@Entity
+@Table(name = "group_list")
+public class GroupData implements Serializable {
 
     @XStreamOmitField
+    @Id
+    @Column(name = "group_id")
     private int id = Integer.MAX_VALUE;
+
     @Expose
+    @Id
+    @Column(name = "group_name")
     private String name;
+
     @Expose
+    @Id
+    @Column(name = "group_header")
+    @Type(type = "text")
     private String header;
+
     @Expose
+    @Id
+    @Column(name = "group_footer")
+    @Type(type = "text")
     private String footer;
 
     public int getId() {
