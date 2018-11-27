@@ -1,9 +1,9 @@
 <configuration>
 
-    <property name="PACKAGE_WITH_LOGS" value = "/src/test/logs"/>
-    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+    <property name="PACKAGE_WITH_LOGS" value="src/test/logs"/>
+    <timestamp key="byTime" datePattern="dd-MM-yyyy' 'HH:mm:ss"/>
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${PACKAGE_WITH_LOGS}/test-${bySecond}.log</file>
+        <file>${PACKAGE_WITH_LOGS}/Test: ${byTime}.log</file>
         <!-- set immediateFlush to false for much higher logging throughput -->
         <immediateFlush>true</immediateFlush>
         <!-- encoders are assigned the type

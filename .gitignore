@@ -15,5 +15,8 @@ gradle-app.setting
 
 .idea/*
 .DS_Store/*
+.DS_Store
 addressbook-web-tests/out
 sandbox/out
+logs/
+build/
