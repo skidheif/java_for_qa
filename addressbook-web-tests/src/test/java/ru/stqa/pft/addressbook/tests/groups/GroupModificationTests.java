@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.groups.GroupData;
 import ru.stqa.pft.addressbook.model.groups.Groups;
 import ru.stqa.pft.addressbook.tests.TestBase;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 

@@ -241,6 +241,14 @@ public class ContactData implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", title='" + title + '\'' +
+                ", company='" + company + '\'' +
+                ", address='" + address + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", email='" + email + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
                 '}';
     }
 
@@ -251,11 +259,19 @@ public class ContactData implements Serializable {
         ContactData that = (ContactData) o;
         return id == that.id &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(lastName, that.lastName);
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(nickname, that.nickname) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(company, that.company) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(mobilePhone, that.mobilePhone) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(email2, that.email2) &&
+                Objects.equals(email3, that.email3);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lastName);
+        return Objects.hash(id, name, lastName, nickname, title, company, address, mobilePhone, email, email2, email3);
     }
 }
