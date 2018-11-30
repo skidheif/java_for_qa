@@ -8,6 +8,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
+import ru.stqa.pft.addressbook.model.contacts.ContactData;
+import ru.stqa.pft.addressbook.model.contacts.Contacts;
 import ru.stqa.pft.addressbook.model.groups.GroupData;
 import ru.stqa.pft.addressbook.model.groups.Groups;
 
@@ -46,7 +48,7 @@ public class TestBase {
     }
 
     public void verifyGroupListInUI() {
-        if (Boolean.getBoolean("verifyUI")) {
+        if (Boolean.getBoolean("verifyUIGroups")) {
             Groups dbGroups = app.db().groups();
             Groups uiGroups = app.group().all();
             assertThat(uiGroups, equalTo(dbGroups.stream()
