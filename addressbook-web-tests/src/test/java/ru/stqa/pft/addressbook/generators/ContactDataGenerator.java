@@ -65,8 +65,8 @@ public class ContactDataGenerator {
                     contact.getCompany(),
                     contact.getAddress(),
                     contact.getMobilePhone(),
-                    contact.getEmail(),
-                    contact.getGroup()
+                    contact.getEmail()
+                    //contact.getGroup()
             ));
         }
         writer.close();
@@ -103,7 +103,7 @@ public class ContactDataGenerator {
                     .withMobilePhone("81234567890")
                     .withEmail("test@test.com")
                     //.withPhoto(photo)
-                    .withGroup("test1")
+                    //.withGroup("test1")
             );
         }
         return contacts;
