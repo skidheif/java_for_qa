@@ -8,11 +8,12 @@ import ru.stqa.pft.addressbook.model.groups.GroupData;
 import ru.stqa.pft.addressbook.model.groups.Groups;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
+import java.util.Random;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
-public class ContactModificationTests extends TestBase {
+public class ContactAddToGroupTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -38,27 +39,28 @@ public class ContactModificationTests extends TestBase {
     }
 
     @Test
-    public void testContactModification() {
-        Groups groups = app.db().groups();
+    public void testContactAddToGroup() {
+        Groups groupsBefore = app.db().groups();
+        Contacts contactsBefore = app.db().contacts();
+        Random rand = new Random();
+        ContactData selectedContact = contactsBefore.stream().skip(rand.nextInt(contactsBefore.size()) % contactsBefore.size()).findFirst().get();
+        Groups selectedContactGroupsBefore = selectedContact.getGroups();
+        groupsBefore.removeAll(selectedContactGroupsBefore);
+        GroupData addedGroup;
         app.goTo().homePage();
-        Contacts before = app.db().contacts();
-        ContactData modifiedContact = before.iterator().next();
-        ContactData contact = new ContactData()
-                .withId(modifiedContact.getId())
-                .withName("Petr")
-                .withLastName("Petrov")
-                .withNickname("Petrov Nickname")
-                .withTitle("Petrov Title")
-                .withCompany("Petrov company")
-                .withAddress("Petrov")
-                .withMobilePhone("89997778800")
-                .withEmail("petrov@petrov.com")
-                .inGroup(groups.iterator().next());
-        app.contact().modify(contact);
-        Contacts after = app.db().contacts();
-        assertEquals(after.size(), before.size());
-        assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+        if (groupsBefore.size() > 0) {
+            addedGroup = groupsBefore.iterator().next();
+            app.contact().addToGroup(selectedContact, addedGroup);
+        } else {
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("NewTestGroup"));
+            Groups groupsAfter = app.db().groups();
+            groupsAfter.removeAll(selectedContactGroupsBefore);
+            addedGroup = groupsAfter.iterator().next();
+            app.goTo().homePage();
+            app.contact().addToGroup(selectedContact, addedGroup);
+        }
+        Groups selectedContactGroupsAfter = app.db().contactById(selectedContact.getId()).iterator().next().getGroups();
+        assertThat(selectedContactGroupsAfter, equalTo(selectedContactGroupsBefore.withAdded(addedGroup)));
     }
-
-
 }

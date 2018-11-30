@@ -88,10 +88,16 @@ public class ContactData implements Serializable {
     private Set<GroupData> groups = new HashSet<GroupData>();
 
     public Groups getGroups() {
+        if (groups == null) {
+            groups = new HashSet<>();
+        }
         return new Groups(groups);
     }
 
     public ContactData inGroup(GroupData group) {
+        if (groups == null) {
+            groups = new HashSet<>();
+        }
         groups.add(group);
         return this;
     }

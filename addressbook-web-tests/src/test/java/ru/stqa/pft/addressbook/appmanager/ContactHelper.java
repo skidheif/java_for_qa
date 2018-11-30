@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.contacts.ContactData;
 import ru.stqa.pft.addressbook.model.contacts.Contacts;
+import ru.stqa.pft.addressbook.model.groups.GroupData;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContactById(int id) {
-        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+        wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
     }
 
     private void contactModificationById(int id) {
@@ -78,6 +79,33 @@ public class ContactHelper extends HelperBase {
         }
         click(By.linkText("add new"));
     }
+
+    public void addToGroupSelectContact(GroupData group) {
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(Integer.toString(group.getId()));
+        click(By.xpath("//input[@value='Add to']"));
+    }
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        addToGroupSelectContact(group);
+        goToHomePage();
+    }
+
+    public void removeFromGroup(ContactData contact, GroupData group) {
+        scrollContactsByGroupFilter(group);
+        selectContactById(contact.getId());
+        removeSelectedContact();
+        goToHomePage();
+    }
+
+    public void scrollContactsByGroupFilter(GroupData group) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(Integer.toString(group.getId()));
+    }
+
+    public void removeSelectedContact() {
+        click(By.xpath("//input[@name='remove']"));
+    }
+
 
     public void create(ContactData contact, boolean creation) {
         gotoAddNewContactPage();
