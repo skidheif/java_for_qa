@@ -7,6 +7,7 @@ import ru.stqa.pft.mantis.model.Project;
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.util.Random;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
@@ -23,11 +24,16 @@ public class SoapTests extends TestBase {
     }
 
     @Test
-    public void testCreateIssue() throws RemoteException, ServiceException, MalformedURLException {
+    public void testCreateIssue() throws MalformedURLException, ServiceException, RemoteException {
+        Set<Issue> issuesId = app.db().issuesId();
+        Random random = new Random();
+        Issue issueId = issuesId.stream().skip(random.nextInt(issuesId.size()) % issuesId.size()).findFirst().get();
+        skipIfNotFixed(issueId.getId());
+
         Set<Project> projects = app.soap().getProjects();
         Issue issue = new Issue()
                 .withSummary("Test issue")
-                .withDescription("Test issue description")
+                .withDescription("Test description")
                 .withProject(projects.iterator().next());
         Issue created = app.soap().addIssue(issue);
         assertEquals(issue.getSummary(), created.getSummary());
