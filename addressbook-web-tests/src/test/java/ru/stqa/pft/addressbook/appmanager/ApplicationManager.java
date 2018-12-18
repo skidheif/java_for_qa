@@ -47,20 +47,19 @@ public class ApplicationManager {
             } else if (browser.equals(BrowserType.SAFARI)) {
                 wd = new SafariDriver();
             }
-
-            wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            wd.get(properties.getProperty("web.baseUrl"));
-            sessionHelper = new SessionHelper(wd);
-            groupHelper = new GroupHelper(wd);
-            navigationHelper = new NavigationHelper(wd);
-            contactHelper = new ContactHelper(wd);
-            sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
-            capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "macos")));
+            capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "macOS")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
         }
+        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wd.get(properties.getProperty("web.baseUrl"));
+        sessionHelper = new SessionHelper(wd);
+        groupHelper = new GroupHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
+        contactHelper = new ContactHelper(wd);
+        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
     }
 
     public void stop() {
